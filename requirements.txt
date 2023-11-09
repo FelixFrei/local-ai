@@ -1,0 +1,6 @@
+llama-index
+ipywidgets
+langchain
+torch
+transformers
+accelerate
