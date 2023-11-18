@@ -2,6 +2,8 @@
 
 # Install the required packages
 sudo apt-get install -y asciidoctor
+sudo apt-get install ruby rubygems
+sudo gem install asciidoctor-pdf
 
 git clone https://github.com/bitcoinbook/bitcoinbook.git
 
