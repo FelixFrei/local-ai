@@ -1,7 +1,6 @@
 import logging
 import sys
 import torch
-from pynput.keyboard import Key, Listener
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
 from llama_index import VectorStoreIndex, ServiceContext, set_global_service_context, SimpleDirectoryReader
