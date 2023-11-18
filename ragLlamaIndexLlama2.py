@@ -58,19 +58,19 @@ response = query_engine.query("What is the purpose of BIP39?")
 print("The answer is:")
 print(response)
 
+
 while True:
     try:
         if keyboard.is_pressed('esc'):
-            print('Sie drückten die ESC-Taste!')
-            break  # Beenden Sie die Schleife
+            break
         else:
-            query_engine = index.as_query_engine()
-
             # Fragen Sie den Benutzer nach der Frage
+            print('Press ESC-Taste to finish')
             question = input("What's your question?: ")
 
             response = query_engine.query(question)
             print("The answer is:")
             print(response)
     except:
+        print("Error:", e)
         break
