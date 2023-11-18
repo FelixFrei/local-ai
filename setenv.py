@@ -280,6 +280,9 @@ def update_requirements(initial_installation=False):
     clear_cache()
 
 
+def launch_webui():
+    run_cmd(f"python ragLlamaIndexLlama2.py", environment=True)
+
 if __name__ == "__main__":
     # Verifies we are in a conda environment
     check_env()
@@ -300,4 +303,7 @@ if __name__ == "__main__":
         conda_path_bin = os.path.join(conda_env_path, "bin")
         if not os.path.exists(conda_path_bin):
             os.mkdir(conda_path_bin)
+
+        # Launch the webui
+        launch_model()
 
