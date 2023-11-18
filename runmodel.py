@@ -56,7 +56,6 @@ def run_cmd(cmd, assert_success=False, environment=False, capture_output=False, 
 
 def update_requirements(initial_installation=False):
 
-
     # Install/update the project requirements
     run_cmd("python -m pip install -r requirements.txt --upgrade", assert_success=True, environment=True)
 
@@ -71,7 +70,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--update', action='store_true', help='Update the web UI.')
     args, _ = parser.parse_known_args()
-
 
     update_requirements()
 
