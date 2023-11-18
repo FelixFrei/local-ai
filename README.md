@@ -10,6 +10,10 @@ Using Llamaindex and Llama2 to build a  RAG setup.
 Based on 
 https://gpt-index.readthedocs.io/en/latest/examples/vector_stores/SimpleIndexDemoLlama-Local.html
 
+## Prerequisites
+
+You will need a data set.
+
 ## Docker Images
 You can you the base images. These own images are based on the NVIDIA CUDA images and just to safe time.
 
@@ -20,9 +24,9 @@ Docker Image to run the Oobabooba model on a GPU.
 
 
 ``` 
-docker build -f dockerfiles/oobabooga/GPU/Dockerfile -t felixfreichur/local-ai:0.10.0 .
+docker build -f dockerfiles/oobabooga/GPU/Dockerfile -t felixfreichur/local-ai:0.11.0 .
 
-docker push felixfreichur/local-ai:0.10.0
+docker push felixfreichur/local-ai:0.11.0
 ``` 
 
 ### Nvidia CUDA

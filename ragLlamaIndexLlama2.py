@@ -42,7 +42,7 @@ llm = HuggingFaceLLM(
     model_kwargs={"torch_dtype": torch.float16, "load_in_8bit": True},
 )
 
-documents = SimpleDirectoryReader(".data/swiss-football/").load_data()
+documents = SimpleDirectoryReader("./data/swiss-football/").load_data()
 
 service_context = ServiceContext.from_defaults(
     llm=llm, embed_model="local:BAAI/bge-small-en"
@@ -53,6 +53,6 @@ index = VectorStoreIndex.from_documents(documents)
 
 query_engine = index.as_query_engine()
 
-response = query_engine.query("How much salary does a referee get?")
+response = query_engine.query("In which case is a handball not considered a handball?")
 print("The answer is:")
 print(response)

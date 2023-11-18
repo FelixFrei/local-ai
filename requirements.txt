@@ -5,3 +5,6 @@ torch
 transformers
 accelerate
 pypdf
+bitsandbytes
+scipy
+
