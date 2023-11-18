@@ -71,6 +71,6 @@ while True:
             response = query_engine.query(question)
             print("The answer is:")
             print(response)
-    except:
+    except Exception as e:
         print("Error:", e)
         break
