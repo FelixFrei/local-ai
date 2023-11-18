@@ -7,6 +7,5 @@ accelerate
 pypdf
 bitsandbytes
 scipy
-numexpr
 
 

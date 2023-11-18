@@ -2,13 +2,11 @@ import logging
 import sys
 import torch
 import os
-import numexpr as ne
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
 from llama_index import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage, \
-    set_global_service_context
+    set_global_service_context, LangchainEmbedding, ServiceContext
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-from llama_index import LangchainEmbedding, ServiceContext
 
 os.environ['NUMEXPR_MAX_THREADS'] = '4'
 os.environ['NUMEXPR_NUM_THREADS'] = '2'
