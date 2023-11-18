@@ -280,7 +280,7 @@ def update_requirements(initial_installation=False):
     clear_cache()
 
 
-def launch_webui():
+def launch_model():
     run_cmd(f"python ragLlamaIndexLlama2.py", environment=True)
 
 if __name__ == "__main__":
