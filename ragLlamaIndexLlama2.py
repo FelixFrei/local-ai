@@ -1,6 +1,7 @@
 import logging
 import sys
 import torch
+import keyboard
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
 from llama_index import VectorStoreIndex, ServiceContext, set_global_service_context, SimpleDirectoryReader
@@ -56,3 +57,20 @@ query_engine = index.as_query_engine()
 response = query_engine.query("What is the purpose of BIP39?")
 print("The answer is:")
 print(response)
+
+while True:
+    try:
+        if keyboard.is_pressed('esc'):
+            print('Sie drückten die ESC-Taste!')
+            break  # Beenden Sie die Schleife
+        else:
+            query_engine = index.as_query_engine()
+
+            # Fragen Sie den Benutzer nach der Frage
+            question = input("What's your question?: ")
+
+            response = query_engine.query(question)
+            print("The answer is:")
+            print(response)
+    except:
+        break

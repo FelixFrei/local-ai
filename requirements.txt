@@ -7,4 +7,5 @@ accelerate
 pypdf
 bitsandbytes
 scipy
+keyboard
 
