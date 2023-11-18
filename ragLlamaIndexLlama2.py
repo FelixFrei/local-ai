@@ -58,20 +58,12 @@ response = query_engine.query("What is the purpose of BIP39?")
 print("The answer is:")
 print(response)
 
+while True:
+    question = input("Please insert your question: ")
 
-def on_press(key):
-    if key == Key.esc:
-        # Stop listener
-        return False
-    else:
-        # Fragen Sie den Benutzer nach der Frage
-        question = input("Please insert your question: ")
+    if question == '\x1b':
+        break
 
-        model_response = query_engine.query(question)
-        print("The answer is:")
-        print(model_response)
-
-
-# Collect events until released
-with Listener(on_press=on_press) as listener:
-    listener.join()
+    response = query_engine.query(question)
+    print("The answer is:")
+    print(response)
