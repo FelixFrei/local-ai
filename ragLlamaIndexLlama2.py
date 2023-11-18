@@ -1,7 +1,7 @@
 import logging
 import sys
 import torch
-import keyboard
+from pynput.keyboard import Key, Listener
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
 from llama_index import VectorStoreIndex, ServiceContext, set_global_service_context, SimpleDirectoryReader
@@ -59,18 +59,19 @@ print("The answer is:")
 print(response)
 
 
-while True:
-    try:
-        if keyboard.is_pressed('esc'):
-            break
-        else:
-            # Fragen Sie den Benutzer nach der Frage
-            print('Press ESC-Taste to finish')
-            question = input("What's your question?: ")
+def on_press(key):
+    if key == Key.esc:
+        # Stop listener
+        return False
+    else:
+        # Fragen Sie den Benutzer nach der Frage
+        question = input("Please insert your question: ")
 
-            response = query_engine.query(question)
-            print("The answer is:")
-            print(response)
-    except Exception as e:
-        print("Error:", e)
-        break
+        model_response = query_engine.query(question)
+        print("The answer is:")
+        print(model_response)
+
+
+# Collect events until released
+with Listener(on_press=on_press) as listener:
+    listener.join()
