@@ -5,8 +5,7 @@ import os
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
 from llama_index import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage, \
-    set_global_service_context, LangchainEmbedding, ServiceContext
-from langchain.embeddings.huggingface import HuggingFaceEmbeddings
+    set_global_service_context, ServiceContext
 
 os.environ['NUMEXPR_MAX_THREADS'] = '4'
 os.environ['NUMEXPR_NUM_THREADS'] = '2'
@@ -50,9 +49,11 @@ llm = HuggingFaceLLM(
     model_kwargs={"torch_dtype": torch.float16, "load_in_8bit": True},
 )
 
-# load in HF embedding model from langchain
-embed_model = LangchainEmbedding(HuggingFaceEmbeddings())
-service_context = ServiceContext.from_defaults(embed_model=embed_model)
+
+service_context = ServiceContext.from_defaults(
+    llm=llm, embed_model="local:BAAI/bge-small-en"
+)
+set_global_service_context(service_context)
 
 try:
     storage_context = StorageContext.from_defaults(persist_dir='./storage/cache/bitcoinbook/')
@@ -77,8 +78,6 @@ except:
 
     new_index.storage_context.persist(persist_dir='./storage/cache/bitcoinbook/')
     print('persisting to disk')
-
-set_global_service_context(service_context)
 
 response = query_engine.query("What is the purpose of BIP39?")
 print("The answer is:")
