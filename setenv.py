@@ -12,6 +12,10 @@ print("Conda environment path:", conda_env_path)
 # os.environ["HCC_AMDGPU_TARGET"] = 'gfx1030'
 
 
+def is_windows():
+    return sys.platform.startswith("win")
+
+
 def check_env():
     # If we have access to conda, we are probably in an environment
     conda_exist = run_cmd("conda", environment=True, capture_output=True).returncode == 0
