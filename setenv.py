@@ -296,17 +296,6 @@ if __name__ == "__main__":
             print_big_message("Install finished successfully and will now exit due to LAUNCH_AFTER_INSTALL.")
             sys.exit()
 
-        # Check if a model has been downloaded yet
-        if '--model-dir' in flags:
-            # Splits on ' ' or '=' while maintaining spaces within quotes
-            flags_list = re.split(' +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)|=', flags)
-            model_dir = [flags_list[(flags_list.index(flag)+1)] for flag in flags_list if flag == '--model-dir'][0].strip('"\'')
-        else:
-            model_dir = 'models'
-
-        if len([item for item in glob.glob(f'{model_dir}/*') if not item.endswith(('.txt', '.yaml'))]) == 0:
-            print_big_message("WARNING: You haven't downloaded any model yet.\nOnce the web UI launches, head over to the \"Model\" tab and download one.")
-
         # Workaround for llama-cpp-python loading paths in CUDA env vars even if they do not exist
         conda_path_bin = os.path.join(conda_env_path, "bin")
         if not os.path.exists(conda_path_bin):
