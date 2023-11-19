@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is used to run the model in a linux environment.
+# run with: ./run_linux.sh --update when you need to setup the python environment
 
 # config
 CONDA_ROOT_PREFIX="../text-generation-webui/installer_files/conda"

@@ -72,7 +72,10 @@ if __name__ == "__main__":
     parser.add_argument('--update', action='store_true', help='Update the web UI.')
     args, _ = parser.parse_known_args()
 
-    update_requirements()
+    for i in range(1, len(sys.argv)):
+        if sys.argv[i] == '--update':
+            print("Update requirements!")
+            update_requirements()
 
     # Launch the model
     launch_model()

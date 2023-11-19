@@ -86,13 +86,28 @@ except Exception as e:
     print('Error loading index or creating new index and persisted to disk' + str(e))
 
 
-search_text = "What is the purpose of BIP39?"
-embedding = embed_model.get_text_embedding(search_text)
+# search_text = "What is the purpose of BIP39?"
+# embedding = embed_model.get_text_embedding(search_text)
+#
+# results = chroma_collection.query(
+#     query_embeddings=[embedding],
+#     n_results=4
+# )
+#
+# print("Text embeddings are:")
+# print(results)
 
-results = chroma_collection.query(
-    query_embeddings=[embedding],
-    n_results=4
-)
 
-print("Text embeddings are:")
-print(results)
+response = query_engine.query("What is the purpose of BIP39?")
+print("The answer is:")
+print(response)
+
+while True:
+    question = input("Please insert your question: ")
+
+    if question == '\x1b':
+        break
+
+    response = query_engine.query(question)
+    print("The answer is:")
+    print(response)
