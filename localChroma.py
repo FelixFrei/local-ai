@@ -2,10 +2,12 @@ import logging
 import sys
 import torch
 import os
+
+from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
 from llama_index import VectorStoreIndex, SimpleDirectoryReader, load_index_from_storage, \
-    set_global_service_context, ServiceContext
+    set_global_service_context, ServiceContext, LangchainEmbedding
 import chromadb
 from llama_index.vector_stores import ChromaVectorStore
 from llama_index.storage.storage_context import StorageContext
@@ -56,9 +58,12 @@ llm = HuggingFaceLLM(
 chroma_client = chromadb.EphemeralClient()
 chroma_collection = chroma_client.create_collection("bitcoinbook")
 
+embed_model = LangchainEmbedding(
+    HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+)
 
 service_context = ServiceContext.from_defaults(
-    llm=llm, embed_model="local:BAAI/bge-small-en"
+    llm=llm, embed_model=embed_model
 )
 set_global_service_context(service_context)
 
