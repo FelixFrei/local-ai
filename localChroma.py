@@ -7,7 +7,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index.embeddings import LangchainEmbedding
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
-from llama_index import VectorStoreIndex, set_global_service_context, ServiceContext
+from llama_index import VectorStoreIndex, set_global_service_context, ServiceContext, SimpleDirectoryReader
 import chromadb
 from llama_index.vector_stores import ChromaVectorStore
 from llama_index.storage.storage_context import StorageContext
@@ -58,12 +58,14 @@ llm = HuggingFaceLLM(
 chroma_client = chromadb.EphemeralClient()
 chroma_collection = chroma_client.create_collection("bitcoinbook")
 
+documents = SimpleDirectoryReader("./data/bitcoinbook/").load_data()
+
 embed_model = LangchainEmbedding(
     HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 )
 
 service_context = ServiceContext.from_defaults(
-    llm=llm, embed_model=embed_model
+     llm=llm, embed_model=embed_model
 )
 set_global_service_context(service_context)
 
@@ -73,7 +75,7 @@ try:
 
     vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
-    index = VectorStoreIndex.from_vector_store(vector_store=vector_store, storage_context=storage_context)
+    index = VectorStoreIndex.from_documents(documents, storage_context=storage_context, service_context=service_context)
     print('index created')
     query_engine = index.as_query_engine(
         verbose=True,
