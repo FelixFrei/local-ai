@@ -84,7 +84,6 @@ except Exception as e:
     print('Error loading index or creating new index and persisted to disk' + str(e))
 
 
-embed_model = service_context.embed_model
 search_text = "What is the purpose of BIP39?"
 embedding = embed_model.get_text_embedding(search_text)
 
