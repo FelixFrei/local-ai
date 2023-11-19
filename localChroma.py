@@ -4,10 +4,10 @@ import torch
 import os
 
 from langchain.embeddings import HuggingFaceEmbeddings
+from llama_index.embeddings import LangchainEmbedding
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
-from llama_index import VectorStoreIndex, SimpleDirectoryReader, load_index_from_storage, \
-    set_global_service_context, ServiceContext, LangchainEmbedding
+from llama_index import VectorStoreIndex, set_global_service_context, ServiceContext
 import chromadb
 from llama_index.vector_stores import ChromaVectorStore
 from llama_index.storage.storage_context import StorageContext
