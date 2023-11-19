@@ -61,7 +61,8 @@ def update_requirements(initial_installation=False):
 
 
 def launch_model():
-    run_cmd(f"python localStore.py", environment=True)
+    run_cmd(f"python localChroma.py", environment=True)
+
 
 if __name__ == "__main__":
     # Verifies we are in a conda environment
