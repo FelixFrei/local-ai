@@ -12,36 +12,39 @@ https://gpt-index.readthedocs.io/en/latest/examples/vector_stores/SimpleIndexDem
 
 ## Prerequisites
 
-You will need a data set.
+You need to have a proper setup of oobabooga text-generation-webui. We use this to ensure all the packages, drivers and dependencies are installed.
+Follow the instructions here:
+https://github.com/oobabooga/text-generation-webui
 
-sudo apt-get install -y asciidoctor
-
-git clone https://github.com/bitcoinbook/bitcoinbook.git
-
-## How to use withouth Docker
-
+Ensure both project are in the same folder.
 ``` 
 git clone https://github.com/FelixFrei/local-ai.git
 
-cd local-ai/
 
-conda create -n ai python=3.11
+ubuntu@host:~$ ls -la
+drwxrwxr-x  7 ubuntu ubuntu      4096 Nov 18 12:19 local-ai
+drwxrwxr-x 23 ubuntu ubuntu      4096 Nov 18 09:06 text-generation-webui
+
+``` 
+
+Setup the data example.
+``` 
+./get_bitcoinbook_data.sh
+
+``` 
 
 
-pip3 install -r requirements.txt
+## run the script
 
 ```
-
-Download the data into the data/swiss-football folder.
-
-```
-
 
 huggingface-cli login
 
-python3 ragLlamaIndexLlama2.py
 
-``` 
+./run_linux.sh
+
+```
+
 
 
 ## Docker Images
@@ -54,9 +57,9 @@ Docker Image to run the Oobabooba model on a GPU.
 
 
 ``` 
-docker build -f dockerfiles/oobabooga/GPU/Dockerfile -t felixfreichur/local-ai:0.11.0 .
+docker build -f dockerfiles/oobabooga/GPU/Dockerfile -t felixfreichur/local-ai:0.12.0 .
 
-docker push felixfreichur/local-ai:0.11.0
+docker push felixfreichur/local-ai:0.12.0
 ``` 
 
 ### Nvidia CUDA

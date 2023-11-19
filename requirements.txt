@@ -7,5 +7,6 @@ accelerate
 pypdf
 bitsandbytes
 scipy
+chromadb
 
 
