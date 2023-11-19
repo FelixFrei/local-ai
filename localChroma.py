@@ -88,6 +88,5 @@ results = chroma_collection.query(
     n_results=4
 )
 
-response = query_engine.query("What is the purpose of BIP39?")
-print("The answer is:")
-print(response)
+print("Text embeddings are:")
+print(results)
